@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>OneMarkDown</AssemblyName>
+    <RootNamespace>OneMarkDown.Shell</RootNamespace>
+    <UseWindowsForms>true</UseWindowsForms>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- 托盘图标从内嵌资源加载，不依赖外部文件。 -->
+    <EmbeddedResource Include="app.ico">
+      <LogicalName>OneMarkDown.app.ico</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 直接复用加载项里的渲染 / 剪贴板实现，避免同一套逻辑维护两份。 -->
+    <ProjectReference Include="..\OneMarkDown.AddIn\OneMarkDown.AddIn.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui" onLoad="OnRibbonLoad">
+  <ribbon>
+    <tabs>
+      <tab id="OneMarkDown.Tab" label="Markdown">
+        <group id="OneMarkDown.Group.Paste" label="Markdown 粘贴">
+          <button id="OneMarkDown.Btn.Paste"
+                  label="粘贴 Markdown"
+                  size="large"
+                  onAction="OnPasteMarkdown"
+                  screentip="把剪贴板中的 Markdown 渲染成 OneNote 富文本"
+                  supertip="读取剪贴板中的 Markdown 文本，转换为 OneNote 友好格式并自动按 Ctrl+V 插入到光标处。若自动粘贴未生效，内容已在剪贴板中，手动按 Ctrl+V 即可。" />
+          <button id="OneMarkDown.Btn.File"
+                  label="从 .md 文件插入"
+                  size="large"
+                  onAction="OnInsertFile"
+                  screentip="选择一个 Markdown 文件并插入到当前页面"
+                  supertip="文中以相对路径引用的图片会自动按 base64 嵌入。" />
+        </group>
+        <group id="OneMarkDown.Group.Help" label="帮助">
+          <button id="OneMarkDown.Btn.Help"
+                  label="诊断信息"
+                  size="large"
+                  onAction="OnHelp"
+                  screentip="查看版本与加载状态"
+                  supertip="把版本、加载项注册状态、日志尾部复制到剪贴板，便于排查问题。" />
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>

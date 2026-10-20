@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>Library</OutputType>
+    <RootNamespace>OneMarkDown</RootNamespace>
+    <AssemblyName>OneMarkDown.AddIn</AssemblyName>
+    <UseWindowsForms>true</UseWindowsForms>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="All" />
+    <PackageReference Include="Markdig" Version="0.37.0" />
+    <PackageReference Include="AngleSharp" Version="1.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 用官方 Office PIA 声明 IRibbonExtensibility / IRibbonControl / IRibbonUI，
+         不再手写 ComImport。PIA 由类型库生成，接口布局与宿主期望逐字节一致。
+         Private=false：不复制到输出目录，运行时从 GAC 解析（任何装了 Office 的机器都有）。 -->
+    <!-- dotnet build 不走 GAC 探测，必须给 HintPath。Office 2013~2024 的 PIA 都是这套标识。 -->
+    <Reference Include="office">
+      <HintPath>$(WINDIR)\assembly\GAC_MSIL\office\15.0.0.0__71e9bce111e9429c\office.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Ribbon\Ribbon.xml">
+      <LogicalName>OneMarkDown.Ribbon.xml</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,76 @@
+#############
+# 构建输出
+#############
+[Bb]in/
+[Oo]bj/
+[Aa]rtifacts/
+[Pp]ackage/
+[Pp]ublish/
+dist/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ll]og/
+[Ll]ogs/
+*.binlog
+
+#############
+# Visual Studio / MSBuild 中间文件
+#############
+.vs/
+*.user
+*.userosscache
+*.suo
+*.sln.docprojects
+*.vcxproj.user
+*.nuget.props
+*.nuget.targets
+project.lock.json
+project.fragment.lock.json
+
+#############
+# 测试
+#############
+[Tt]est[Rr]esult*/
+[Tt]est[RR]esult*/
+[Tt]est[Rr]esults/
+*.coverage
+*.coveragexml
+*.visualstate.xml
+TestResult.xml
+
+#############
+# NuGet
+#############
+*.nupkg
+*.snupkg
+
+#############
+# 发布
+#############
+*.publishsettings
+*.pubxml
+publish/
+
+#############
+# ReSharper / Rider
+#############
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+.idea/
+*.sln.iml
+
+#############
+# Office 临时文件（本项目涉及 Word）
+#############
+~$*
+
+#############
+# 日志与临时文件
+#############
+*.log
+*.tmp
+*.temp
+.code*
