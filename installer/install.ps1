@@ -3,7 +3,7 @@
     安装 OneMarkDown 加载项。
 
 .DESCRIPTION
-    从分发包里运行：本脚本所在目录的旁边必须有 AddIn\ 子目录。
+    从分发包里运行：AddIn\ 与本脚本所在的 installer\ 目录平级（即 package\AddIn 与 package\installer）。
     本脚本只做安装：
       1. 结束占用旧 DLL 的 dllhost 代理进程
       2. 把 AddIn\ 里的文件复制到 %LOCALAPPDATA%\OneMarkDown\bin
@@ -26,10 +26,17 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $packageRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
-$Source = Join-Path $packageRoot 'AddIn'
 
-if (-not (Test-Path $Source)) {
-    throw "安装包不完整：找不到 $Source。请把压缩包完整解压后再运行本脚本。"
+# 分发包布局是 installer\ 与 AddIn\ 平级（AddIn 在 installer 的上一级）；
+# 也兼容把 AddIn\ 直接放在脚本旁边的自制包，两处都探测一次。
+$candidates = @(
+    (Join-Path (Split-Path -Parent $packageRoot) 'AddIn'),
+    (Join-Path $packageRoot 'AddIn')
+)
+$Source = $candidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+
+if (-not $Source) {
+    throw ("安装包不完整：找不到 AddIn 目录（已查找 {0}）。请把压缩包完整解压后再运行本脚本。" -f ($candidates -join '、'))
 }
 
 $clsid = '{7C4E1B2A-9F3D-4E58-9A61-2B8D5C0F7E31}'
